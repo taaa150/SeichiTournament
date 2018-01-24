@@ -1,0 +1,18 @@
+#SeihiTournament(整地大会運用プラグイン)設定ファイル
+
+##各種設定値
+#チーム人数
+MemberMAX: 5
+#試合時間
+GameTime: 30
+#イベントモード(特殊イベント発生の有無)
+EventMode: false
+
+
+##メンバー設定
+##member下にユーザー名を登録し、その下に更に「ユーザー名:所属チームNo」の形式で登録。
+##team0は「参加チーム未決定」のプレイヤー
+member:
+ - ex_usename
+
+ex_username: 0

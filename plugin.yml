@@ -1,0 +1,10 @@
+name: SeichiTournament
+main: seichitournament.SeichiTournament
+version: 0.0.1
+
+commands:
+  seichitourn:
+    description: This is a command for SeichiTournament
+    usage: /<command> 
+    permission: seichitournament.seichitourn
+    permission-message: You don't have <permission>
