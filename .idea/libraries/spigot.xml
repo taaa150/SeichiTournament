@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="spigot">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../gigantic-前提/SeichiAssist1.10,2/spigot.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../gigantic-前提/SeichiAssist1.10,2/worldguard-6.1.2 (1).jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../gigantic-前提/SeichiAssist1.10,2/spigot.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -102,7 +102,7 @@ public class SeichiTournament extends JavaPlugin {
 					}
 				}
 
-			/*}else if(args[0].equals("addmember")){
+			}else if(args[0].equals("addmember")){
 
 			 	//
 			 	//saveconfigの処理がうまくできないため一時封印中。以降にconfig構造を変更している為、利用時は編集必須
@@ -146,7 +146,7 @@ public class SeichiTournament extends JavaPlugin {
 						saveConfig();
 
 					}
-				}*/
+				}
 			}else if (args[0].equals("setregion")){
 				//各保護・ルナチャットにメンバーを設定
 				for (int loops = 1; loops < 21 ; loops ++){
