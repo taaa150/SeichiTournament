@@ -48,29 +48,24 @@ public class SeichiTournament extends JavaPlugin {
 			//参加者データの読み込み・整理
 			player = (Player)sender ;
 			String[][] teams = new String[21][TeamMAX];
-			int[] counts = new int[21];
-			Arrays.fill(counts, 0);
 			List<String> members = conf.getStringList("member") ;
 			List<String> team0member = new ArrayList<String>();
-			int checkresult = 0 ;
 
-			for (int loops = 0; loops < 999 ; loops ++){
-				if (loops == members.size()){
-					break;
-				}
-				checkresult = conf.getInt(members.get(loops));
+			for (String playerName : members) {
+				int teamNum = conf.getInt(playerName);
 
-				if(0 < checkresult && checkresult < 21){
-					if (counts[checkresult] == TeamMAX - 1){
-						sender.sendMessage("[ERROR]チームNo" + checkresult + "が上限を超えています");
-					}else{
-						teams[checkresult][counts[checkresult]] = members.get(loops);
-						counts[checkresult] ++ ;
+				if (0 < teamNum && teamNum < 21) {
+					if (TeamMAX < teams[teamNum].length) {
+						sender.sendMessage(ChatColor.RED + "[ERROR]チームNo" + teamNum + "が上限を超えています");
+					} else if (Util.isExistsSameFactor(teams[teamNum], playerName)) {
+
+					} else {
+						teams[teamNum] = Util.addFactorLast(teams[teamNum], playerName);
 					}
-				}else if(checkresult == 0){
-					team0member.add(members.get(loops));
-				}else {
-					sender.sendMessage("[ERROR]「" + members.get(loops) + "」のチーム指定が不正です");
+				} else if (teamNum == 0) {
+					team0member.add(playerName);
+				} else {
+					sender.sendMessage(ChatColor.RED + "[ERROR]「" + playerName + "」のチーム指定が不正です");
 				}
 			}
 
