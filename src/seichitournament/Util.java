@@ -68,6 +68,9 @@ public class Util {
 	 */
 	static boolean isExistsSameFactor(String[] checkArray, String checkElement) {
 		for (String element : checkArray) {
+		    if (element == null) {
+		        continue;
+            }
 			if (element.equals(checkElement)) {
 				return true;
 			}
