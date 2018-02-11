@@ -13,6 +13,4 @@ EventMode: false
 ##member下にユーザー名を登録し、その下に更に「ユーザー名:所属チームNo」の形式で登録。
 ##team0は「参加チーム未決定」のプレイヤー
 member:
- - ex_usename
-
-ex_username: 0
+ ex_usename: 0

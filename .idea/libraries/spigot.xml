@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../../gigantic-前提/SeichiAssist1.10,2/spigot.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../gigantic-前提/SeichiAssist1.10,2/worldguard-6.1.2 (1).jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../gigantic-前提/SeichiAssist1.10,2/LunaChat.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

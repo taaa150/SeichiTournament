@@ -1,17 +1,16 @@
 package seichitournament;
 
-import com.mysql.fabric.xmlrpc.base.*;
+import com.github.ucchyocean.lc.*;
+import org.bukkit.*;
+import org.bukkit.configuration.file.*;
 import org.bukkit.plugin.Plugin;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
-import java.lang.reflect.Array;
+import java.util.*;
 
 public class Util {
-	public Util() {
-	}
-
-	public static boolean isInt(String num) {
+	static boolean isInt(String num) {
 		try {
 			Integer.parseInt(num);
 			return true;
@@ -20,7 +19,7 @@ public class Util {
 		return false;
 	}
 
-	public static int toInt(String s) {
+	static int toInt(String s) {
 		return Integer.parseInt(s);
 	}
 
@@ -34,6 +33,18 @@ public class Util {
 	    }
 
 	    return (WorldGuardPlugin) plugin;
+	}
+
+	/**
+	 * LunaChatAPIを返します。
+	 * @return LunaChatAPIインスタンス
+	 */
+	static LunaChatAPI getLunaChatAPI() {
+		if (Bukkit.getServer().getPluginManager().isPluginEnabled("LunaChat")) {
+			LunaChat lunaChat = (LunaChat) Bukkit.getServer().getPluginManager().getPlugin("LunaChat");
+			return lunaChat.getLunaChatAPI();
+		}
+		throw new NullPointerException("LunaChatが有効化されていないようです");
 	}
 
 	/**
@@ -51,6 +62,7 @@ public class Util {
 		for (String check : array) {
 			if (check == null) {
 				array[count] = addElement;
+				break;
 			}
 			count++;
 		}
@@ -76,5 +88,50 @@ public class Util {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * 配列内にNull要素が存在するか返します。
+	 * (trueを返す->配列に空きがある)
+	 *
+	 * @param checkArray 判定する配列
+	 * @return 1つでも存在する: true / 存在しない: false
+	 *
+	 * @author karayuu
+	 */
+	static boolean isExistsNullElements(String[] checkArray) {
+		for (String element: checkArray) {
+			if (element == null) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * configファイルのmemberセクションにプレイヤー名を追加します。
+	 *
+	 * @param conf Config
+	 * @param addName 追加したいプレイヤー名
+	 * @param teamNum 追加したいプレイヤーのチーム番号
+	 */
+	static void addMemberToConf(FileConfiguration conf, String addName, int teamNum) {
+		if (!conf.isConfigurationSection("member." + addName)) {
+			conf.createSection("member." + addName);
+		}
+		conf.set("member." + addName, teamNum);
+	}
+
+	/**
+	 * Object型を指定した型にキャストします
+	 * ※確実に指定型にキャストできる場合のみ使用すること。さもなければ
+	 * CastExceptionをスローするでしょう
+	 *
+	 * @param obj キャストしたいオブジェクト
+	 * @return キャスト後オブジェクト
+	 */
+	@SuppressWarnings("unchecked")
+	static <T> T autoCast(Object obj) {
+		return (T) obj;
 	}
 }
