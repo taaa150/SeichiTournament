@@ -18,7 +18,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class SeichiTournament extends JavaPlugin {
 
 	static SeichiTournament plugin;
-	static LunaChatAPI lunaChatAPI;
 
 	private static Player player = null ;
 	private int TeamMAX = 0 ;
@@ -42,22 +41,26 @@ public class SeichiTournament extends JavaPlugin {
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		lunaChatAPI = Util.getLunaChatAPI();
+		LunaChatAPI lunaChatAPI = Util.getLunaChatAPI();
 		if (!(sender instanceof Player)) {
 			sender.sendMessage("コマンドはplayerから入力してください");
 			return false;
 		}
         // プレイヤーがコマンドを投入した際の処理...
 		if (cmd.getName().equalsIgnoreCase("seichitourn")) {
+			reloadConfig();
 
 			//参加者データの読み込み・整理
 			player = (Player)sender;
 			String[][] teams = new String[21][TeamMAX];
 			Map<String, Integer> data = new HashMap<>();
-			for (Map<?, ?> map : conf.getMapList("member")) {
-				map.forEach((key, value) -> data.put(Util.autoCast(key), Util.autoCast(value)));
+			for (String playerName : conf.getConfigurationSection("Member").getKeys(false)) {
+				data.put(playerName, conf.getInt("Member." + playerName));
+				/*
+				//TODO:TEST
+				player.sendMessage("playerName [" + playerName + "] belongs to team No." + conf.getInt("Member." + playerName));
+				*/
 			}
-			Bukkit.getLogger().info(conf.getMapList("member").toString());
 			List<String> team0member = new ArrayList<>();
 
 			for (String playerName : data.keySet()) {
@@ -123,7 +126,7 @@ public class SeichiTournament extends JavaPlugin {
 				} else if (!(Util.isInt(args[2]))) {
 					sender.sendMessage(ChatColor.RED + "[ERROR] <参加チーム>の項目は「数字(1～20)」で指定する必要があります。");
 					sender.sendMessage("チームが決まっていない場合は<参加チーム>の項目を「0」としてください。");
-				} else if (!(0<= Util.toInt(args[2]) && Util.toInt(args[2]) <= 20)) {
+				} else if (!(0 <= Util.toInt(args[2]) && Util.toInt(args[2]) <= 20)) {
 					sender.sendMessage(ChatColor.RED + "[ERROR] <参加チーム>の項目は1～20の範囲で指定する必要があります。");
 					sender.sendMessage("チームが決まっていない場合は<参加チーム>の項目を「0」としてください。");
 				} else {

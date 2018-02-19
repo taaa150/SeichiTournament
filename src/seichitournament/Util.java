@@ -116,22 +116,9 @@ public class Util {
 	 * @param teamNum 追加したいプレイヤーのチーム番号
 	 */
 	static void addMemberToConf(FileConfiguration conf, String addName, int teamNum) {
-		if (!conf.isConfigurationSection("member." + addName)) {
-			conf.createSection("member." + addName);
+		if (!conf.isConfigurationSection("Member." + addName)) {
+			conf.createSection("Member." + addName);
 		}
-		conf.set("member." + addName, teamNum);
-	}
-
-	/**
-	 * Object型を指定した型にキャストします
-	 * ※確実に指定型にキャストできる場合のみ使用すること。さもなければ
-	 * CastExceptionをスローするでしょう
-	 *
-	 * @param obj キャストしたいオブジェクト
-	 * @return キャスト後オブジェクト
-	 */
-	@SuppressWarnings("unchecked")
-	static <T> T autoCast(Object obj) {
-		return (T) obj;
+		conf.set("Member." + addName, teamNum);
 	}
 }
